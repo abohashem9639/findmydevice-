@@ -26,19 +26,14 @@ namespace FindMyDevice.API
                 .Validate(options => options.AccessTokenMinutes > 0 && options.RefreshTokenDays > 0, "Jwt durations must be greater than zero.")
                 .ValidateOnStart();
 
+            // Email and S3 are optional features in this deployment — bind them
+            // for any code that does opt in, but don't enforce validation at
+            // startup so the API can run without SMTP / S3 credentials.
             builder.Services.AddOptions<EmailOptions>()
-                .Bind(builder.Configuration.GetSection("Email"))
-                .ValidateDataAnnotations()
-                .ValidateOnStart();
+                .Bind(builder.Configuration.GetSection("Email"));
 
             builder.Services.AddOptions<S3StorageOptions>()
-                .Bind(builder.Configuration.GetSection("S3Storage"))
-                .ValidateDataAnnotations()
-                .Validate(options => !string.IsNullOrWhiteSpace(options.AccessKey), "S3Storage:AccessKey is required.")
-                .Validate(options => !string.IsNullOrWhiteSpace(options.SecretKey), "S3Storage:SecretKey is required.")
-                .Validate(options => !string.IsNullOrWhiteSpace(options.ServiceUrl), "S3Storage:ServiceUrl is required.")
-                .Validate(options => !string.IsNullOrWhiteSpace(options.BucketName), "S3Storage:BucketName is required.")
-                .ValidateOnStart();
+                .Bind(builder.Configuration.GetSection("S3Storage"));
 
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
