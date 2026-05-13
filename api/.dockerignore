@@ -1,0 +1,35 @@
+# Build artefacts (regenerated inside the container)
+**/bin/
+**/obj/
+**/out/
+
+# IDE / OS
+**/.vs/
+**/.vscode/
+**/.idea/
+**/*.user
+**/*.suo
+**/.DS_Store
+
+# Source control
+**/.git/
+**/.gitignore
+**/.gitattributes
+
+# Tests are not deployed
+tests/
+
+# Local-only configuration — production reads from env vars
+**/appsettings.Development.json
+**/appsettings.*.local.json
+**/secrets.json
+**/.env
+**/.env.*
+
+# Node tooling (used only by sync-version.mjs, irrelevant in container)
+node_modules/
+
+# Docker self-references
+Dockerfile
+.dockerignore
+README.md

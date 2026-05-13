@@ -1,0 +1,31 @@
+<Project>
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <Version>1.0.0</Version>
+    <InformationalVersion>$(Version)</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <SourceRevisionId Condition="'$(SourceRevisionId)' == ''">$(BUILD_COMMIT_SHA)</SourceRevisionId>
+    <BuildTimestampUtc Condition="'$(BuildTimestampUtc)' == ''">$(BUILD_TIMESTAMP_UTC)</BuildTimestampUtc>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" />
+    <PackageReference Include="Roslynator.Analyzers" Version="4.7.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(SourceRevisionId)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>CommitSha</_Parameter1>
+      <_Parameter2>$(SourceRevisionId)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BuildTimestampUtc)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>BuildTimestampUtc</_Parameter1>
+      <_Parameter2>$(BuildTimestampUtc)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+</Project>

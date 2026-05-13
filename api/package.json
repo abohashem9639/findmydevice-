@@ -1,0 +1,11 @@
+{
+  "name": "@findmydevice/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "prebuild": "node sync-version.mjs",
+    "build": "dotnet build FindMyDevice.slnx",
+    "test": "dotnet test FindMyDevice.slnx",
+    "sync:version": "node sync-version.mjs"
+  }
+}

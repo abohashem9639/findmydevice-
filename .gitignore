@@ -1,0 +1,62 @@
+# ============ .NET ============
+bin/
+obj/
+out/
+*.user
+*.suo
+*.userprefs
+.vs/
+.vscode/
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# ============ Rider / ReSharper ============
+.idea/
+*.sln.iml
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# ============ ASP.NET secrets ============
+secrets.json
+**/appsettings.*.local.json
+.env
+.env.*
+!.env.example
+
+# ============ Android (later) ============
+android/.gradle/
+android/.idea/
+android/build/
+android/app/build/
+android/local.properties
+*.apk
+*.aab
+*.keystore
+!debug.keystore
+
+# ============ Web / Node (later) ============
+web/node_modules/
+web/.next/
+web/out/
+web/.env*.local
+node_modules/
+
+# ============ OS ============
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============ Logs ============
+*.log
+logs/
+
+# ============ Coverage / Test results ============
+TestResults/
+coverage/
+*.coverage
+*.coveragexml

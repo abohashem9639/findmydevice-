@@ -1,0 +1,20 @@
+<Solution>
+  <SolutionItems>
+    <SolutionItem Path=".editorconfig" />
+    <SolutionItem Path="Directory.Build.props" />
+  </SolutionItems>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FindMyDevice.API.IntegrationTests/FindMyDevice.API.IntegrationTests.csproj" />
+    <Project Path="tests/FindMyDevice.Application.UnitTests/FindMyDevice.Application.UnitTests.csproj" />
+    <Project Path="tests/FindMyDevice.Domain.UnitTests/FindMyDevice.Domain.UnitTests.csproj" />
+    <Project Path="tests/FindMyDevice.Infrastructure.UnitTests/FindMyDevice.Infrastructure.UnitTests.csproj" />
+  </Folder>
+  <Project Path="src/FindMyDevice.API/FindMyDevice.API.csproj" />
+  <Project Path="src/FindMyDevice.Application/FindMyDevice.Application.csproj" />
+  <Project Path="src/FindMyDevice.Domain/FindMyDevice.Domain.csproj" />
+  <Project Path="src/FindMyDevice.Infrastructure/FindMyDevice.Infrastructure.csproj" />
+</Solution>
