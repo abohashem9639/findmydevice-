@@ -63,20 +63,26 @@ namespace FindMyDevice.Infrastructure.Extensions
         private static IServiceCollection AddS3Storage(this IServiceCollection services, IConfiguration configuration)
         {
             var s3Options = configuration.GetSection("S3Storage").Get<S3StorageOptions>();
-            if (s3Options != null)
-            {
-                var s3Config = new AmazonS3Config
-                {
-                    ServiceURL = s3Options.ServiceUrl,
-                    ForcePathStyle = true,
-                };
 
-                var s3Credentials = new Amazon.Runtime.BasicAWSCredentials(s3Options.AccessKey, s3Options.SecretKey);
-                // Register the S3 client as a Singleton. AWS SDK clients are thread-safe
-                // and designed to be reused across requests to optimize HTTP connection pooling.
-                services.AddSingleton<IAmazonS3>(new AmazonS3Client(s3Credentials, s3Config));
-                services.AddScoped<IStorageService, S3StorageService>();
+            // Skip S3 setup entirely when the section is missing OR ServiceUrl is empty.
+            // Profile-image upload is an optional feature; when unconfigured we just
+            // don't register the client (instead of crashing at startup).
+            if (s3Options is null || string.IsNullOrWhiteSpace(s3Options.ServiceUrl))
+            {
+                return services;
             }
+
+            var s3Config = new AmazonS3Config
+            {
+                ServiceURL = s3Options.ServiceUrl,
+                ForcePathStyle = true,
+            };
+
+            var s3Credentials = new Amazon.Runtime.BasicAWSCredentials(s3Options.AccessKey, s3Options.SecretKey);
+            // Register the S3 client as a Singleton. AWS SDK clients are thread-safe
+            // and designed to be reused across requests to optimize HTTP connection pooling.
+            services.AddSingleton<IAmazonS3>(new AmazonS3Client(s3Credentials, s3Config));
+            services.AddScoped<IStorageService, S3StorageService>();
 
             return services;
         }
